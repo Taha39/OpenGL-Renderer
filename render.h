@@ -5,6 +5,8 @@
 #include <GL/glew.h>
 #include "Shader.h"
 
+//todo: we need to put it in namespace
+
 class render {
 public:
 	render(HDC hdc, int w, int h);
