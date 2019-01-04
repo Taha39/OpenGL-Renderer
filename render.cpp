@@ -42,21 +42,36 @@ bool render::init() {
 	//VBO: Vertex Buffer Object.
 	//VAO: Vertex Array Object.
 
-	glGenVertexArrays(1, &VAO);
+	glGenVertexArrays(1, &VAO); //generate vertex array object names.
 
-	//It stores the format of the vertex data as well as the Buffer Objects (see below) providing the vertex data arrays.
-	glBindVertexArray(VAO);
+	glBindVertexArray(VAO);//binds the vertex array object with name array
 
-
-	glGenBuffers(1, &VBO);// this is for the vertices that have created above.
+	//get bufffer object names, returned names was not in use,
+	//no buffer objects are associated with the returned buffer object names until
+	//they are first bound by calling glBindBuffer
+	glGenBuffers(1, &VBO);
+	//binds a buffer object to the specified buffer binding point.
 	glBindBuffer(GL_ARRAY_BUFFER, VBO);
+
+	/*
+	create a new data sotre for buffer object created object
+	*/
 	glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
 
 	glGenBuffers(1, &EBO);// This is for the indices that have created above.
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
 	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW);
 
-	// Position attribute
+	/*
+	specify the location and data format of the array 
+	of the generic vertex attributes at index index to use
+	when rendering.
+	glVertexAttribPointer(GLuint index, GLint size, 
+			GLenum type, GLboolean normalized, GLsizei stride, const GLvoid * pointer)
+		size specifies the number of components per attribute and must be 1, 2, 3, 4, or GL_BGRA.
+		type specifies data type of each component in the array.
+
+	*/
 	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 5 * sizeof(GLfloat), (GLvoid *)0);
 	glEnableVertexAttribArray(0);
 	
